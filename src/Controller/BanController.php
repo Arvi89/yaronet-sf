@@ -44,7 +44,9 @@ class BanController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $ban->update($permission->getForum(), $request->request->get('addresses', ''));
+            if (null !== $addresses = $request->request->get('addresses', null)) {
+                $ban->update($permission->getForum(), $addresses);
+            }
         }
 
         $bannedAddresses = $this->entityManager

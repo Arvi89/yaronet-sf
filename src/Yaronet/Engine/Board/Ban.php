@@ -17,7 +17,7 @@ class Ban
 
     /**
      * @param BoardForum $forum
-     * @param array $newAddresses
+     * @param string $addresses
      */
     public function update(BoardForum $forum, string $addresses): void
     {
