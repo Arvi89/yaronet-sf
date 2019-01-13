@@ -44,12 +44,7 @@ class BanController extends AbstractController
         }
 
         if ($request->isMethod('POST')) {
-            $addresses = \array_filter(
-                \array_map('trim',
-                \explode(',', $request->request->get('addresses', ''), BoardBan::COUNT_MAX
-                )));
-
-            $ban->update($permission->getForum(), $addresses);
+            $ban->update($permission->getForum(), $request->request->get('addresses', ''));
         }
 
         $bannedAddresses = $this->entityManager

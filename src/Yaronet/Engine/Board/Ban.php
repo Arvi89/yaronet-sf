@@ -19,8 +19,13 @@ class Ban
      * @param BoardForum $forum
      * @param array $newAddresses
      */
-    public function update(BoardForum $forum, array $newAddresses): void
+    public function update(BoardForum $forum, string $addresses): void
     {
+        $newAddresses = \array_filter(
+            \array_map('trim',
+                \explode(',', $addresses, BoardBan::COUNT_MAX
+                )));
+
         $bannedAddresses = $this->entityManager
             ->getRepository(BoardBan::class)
             ->findBy(array(
